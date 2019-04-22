@@ -1,86 +1,57 @@
 import React, { Component } from 'react'
 import './App.css'
+import ToDoList from './containers/ToDoList'
+// import ToDoItem from './components/ToDoItem'
+// import NewToDoForm from './components/NewToDoForm'
 
-class ToDoItem extends Component {
-  static defaultProps = {
-    done: false
-  }
+// class ToDoList extends Component {
+//   state = {
+//     tasks: this.props.tasks,
+//     draft: ''
+//   }
 
-  state = {
-    done: this.props.done
-  }
+//   updateDraft = e => {
+//     this.setState({
+//       draft: e.target.value
+//     })
+//   }
 
-  toggleDone = () => {
-    this.setState({ done: !this.state.done })
-  }
+//   addNewTask = e => {
+//     const { tasks, draft } = this.state;
+//     e.preventDefault()
 
-  render() {
-    const { text } = this.props
-    const { done } = this.state
+//     const list = tasks
+//     list.push({ text: draft, done: false })
 
-    return (
-      <div onClick={this.toggleDone} className={ done ? 'doneToDo' : '' }>
-        <p>{text}</p>
-      </div>
-    )
-  }
+//     this.setState({
+//       tasks: list,
+//       draft: ''
+//     })
+//   }
 
-}
+//   render() {
+//     const { tasks, draft } = this.state;
+//     const { title } = this.props;
 
-class ToDoList extends Component {
-  state = {
-    tasks: this.props.tasks,
-    draft: ''
-  }
-
-  updateDraft = e => {
-    this.setState({
-      draft: e.target.value
-    })
-  }
-
-  addNewTask = e => {
-    const { tasks, draft } = this.state;
-    e.preventDefault()
-
-    const list = tasks
-    list.push({ text: draft })
-
-    this.setState({
-      tasks: list,
-      draft: ''
-    })
-  }
-
-  render() {
-    const { tasks, draft } = this.state;
-    const { title } = this.props;
-
-    return (
-      <>
-        <h1>{ title }</h1>
-        { tasks.map(task => <ToDoItem text={task.text} done={task.done} />) }
-        <input type='text' onChange={ this.updateDraft } value={draft} />
-        <button onClick={ this.addNewTask }>ADD</button>
-      </>
-    )
-  }
-}
+//     return (
+//       <>
+//         <h1>{ title }</h1>
+//         { tasks.map(task => <ToDoItem text={task.text} done={task.done} />) }
+//         <NewToDoForm 
+//           onSubmit={ this.addNewTask }
+//           onChange={ this.updateDraft }
+//           draft={ draft }
+//         />
+//       </>
+//     )
+//   }
+// }
 
 class App extends Component {
-
-  // Test static defaultProps
-  tasks = [
-    { done: false, text: '123' }, 
-    { done: true, text: '456' },
-    { text: '123' }
-  ]
-
   render() {
-
     return (
       <div>
-        <ToDoList title='Learning React' tasks={ this.tasks } />
+        <ToDoList />
       </div>
     );
   }
