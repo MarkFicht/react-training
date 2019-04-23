@@ -12,7 +12,10 @@ const Item = styled.div`
     text-decoration: ${props => props.done ? 'line-through' : 'auto'};
 `
 
+const url = `http://localhost:4000/todo_items`;
+
 class ToDoItem extends Component {
+
     static defaultProps = {
         done: false
     }
@@ -21,8 +24,27 @@ class ToDoItem extends Component {
         done: this.props.done
     }
 
+    /**
+     * W 'json-server' wysyłam wszystkie atrybuty w body. (np. w api w Railsach, przy PUT mogę zmieniać tylko te atrybuty, co wysyłam).
+     */
     toggleDone = () => {
-        this.setState({ done: !this.state.done })
+        // this.setState({ done: !this.state.done })
+        
+        fetch(`${url}/${this.props.id}`, {
+            method: 'PUT',
+            headers: {
+                "Content-type": 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify({
+                done: !this.state.done,
+                content: this.props.text,
+                key: `u${this.props.id}`
+            })
+        }).then(res => {
+            if ( res.ok ) {
+                this.setState({done: !this.state.done})
+            }
+        })
     }
 
     render() {

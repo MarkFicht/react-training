@@ -18,13 +18,29 @@ const Header = styled.h1`
     color: #FFBF47;
 `
 
+const DestroyButton = styled.button`
+    border-radius: 10px;
+    background: red;
+    padding: 5px;
+    color: white;
+    margin-bottom: 10px;
+`
+
+/**
+ * json-server --watch db.json --port 4000
+ */
+const url = `http://localhost:4000/todo_items`;
+
 class ToDoList extends Component {
+    
+    componentDidMount = () => {
+        fetch( url )
+            .then( res => res.json() )
+            .then( json => this.setState({tasks: json}) )
+    }
+
     static defaultProps = {
-        tasks: [
-            { done: false, text: '123' },
-            { done: true, text: '456' },
-            { text: '123' }
-        ],
+        tasks: [],
         title: 'React - powtórka wiedzy'
     }
 
@@ -52,6 +68,10 @@ class ToDoList extends Component {
         })
     }
 
+    removeAll = () => {
+        this.setState({ tasks: [] })
+    }
+
     render() {
         const { tasks, draft } = this.state;
         const { title } = this.props;
@@ -59,7 +79,8 @@ class ToDoList extends Component {
         return (
             <Container>
                 <Header>{title}</Header>
-                {tasks.map(task => <ToDoItem text={task.text} done={task.done} />)}
+                <DestroyButton onClick={ this.removeAll }>Remove all</DestroyButton>
+                {tasks.map(task => <ToDoItem id={task.id} key={task.key} text={task.content} done={task.done} />)}
                 <NewToDoForm
                     onSubmit={this.addNewTask}
                     onChange={this.updateDraft}
