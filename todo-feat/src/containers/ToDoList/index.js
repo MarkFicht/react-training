@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 
 import ToDoItem from '../../components/ToDoItem'
 import NewToDoForm from '../../components/NewToDoForm'
-import styled from 'styled-components'
+
+import * as toDoItemApi from '../../helpers/toDoItemApi'
 
 const Container = styled.div`
     background: #D9391C;
@@ -26,17 +28,20 @@ const DestroyButton = styled.button`
     margin-bottom: 10px;
 `
 
-/**
- * json-server --watch db.json --port 4000
- */
-const url = `http://localhost:4000/todo_items`;
-
 class ToDoList extends Component {
     
-    componentDidMount = () => {
-        fetch( url )
-            .then( res => res.json() )
-            .then( json => this.setState({tasks: json}) )
+    componentDidMount = async () => {
+        const tasks = await toDoItemApi.getAll()
+        console.log(tasks)
+        this.setState({ tasks })
+
+        // fetch( `http://localhost:4000/todo_items` )
+        //     .then( res => res.json() )
+        //     .then( json => this.setState({tasks: json}) )
+
+        //--- Wersja bez async await ---//
+        // toDoItemApi.getAll()
+        //     .then( r=> ... )
     }
 
     static defaultProps = {
@@ -80,7 +85,7 @@ class ToDoList extends Component {
             <Container>
                 <Header>{title}</Header>
                 <DestroyButton onClick={ this.removeAll }>Remove all</DestroyButton>
-                {tasks.map(task => <ToDoItem id={task.id} key={task.key} text={task.content} done={task.done} />)}
+                { tasks.map(task => <ToDoItem id={task.id} key={task.key} text={task.content} done={task.done} />) }
                 <NewToDoForm
                     onSubmit={this.addNewTask}
                     onChange={this.updateDraft}

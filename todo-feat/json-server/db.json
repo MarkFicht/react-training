@@ -1,7 +1,7 @@
 {
   "todo_items": [
     {
-      "done": true,
+      "done": false,
       "content": "Task 1",
       "key": "u1",
       "id": 1
