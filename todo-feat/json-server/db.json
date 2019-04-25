@@ -11,6 +11,12 @@
       "content": "Task 2",
       "key": "u2",
       "id": 2
+    },
+    {
+      "done": true,
+      "content": "POST przy dodaniu taska",
+      "key": "u3",
+      "id": 3
     }
   ]
 }

@@ -5,6 +5,7 @@ import ToDoItem from '../../components/ToDoItem'
 import NewToDoForm from '../../components/NewToDoForm'
 
 import * as toDoItemApi from '../../helpers/toDoItemApi'
+import * as _ from 'ramda'
 
 const Container = styled.div`
     background: #D9391C;
@@ -60,15 +61,17 @@ class ToDoList extends Component {
         })
     }
 
-    addNewTask = e => {
+    /** https://ramdajs.com/docs/ */
+    addNewTask = async () => {
         const { tasks, draft } = this.state;
-        e.preventDefault()
 
-        const list = tasks
-        list.push({ text: draft, done: false })
+        // const list = tasks
+        // list.push({ text: draft, done: false })
+
+        const task = await toDoItemApi.create({done: false, content: draft, key: ''})
 
         this.setState({
-            tasks: list,
+            tasks: _.append(task, tasks),
             draft: ''
         })
     }
