@@ -8,15 +8,15 @@
     },
     {
       "done": false,
-      "content": "Task 2",
-      "key": "u2",
-      "id": 2
+      "content": "Zadanie 4",
+      "key": "Zadanie 4",
+      "id": 4
     },
     {
-      "done": true,
-      "content": "POST przy dodaniu taska",
-      "key": "u3",
-      "id": 3
+      "done": false,
+      "content": "Zad 3",
+      "key": "Zad 3",
+      "id": 5
     }
   ]
 }

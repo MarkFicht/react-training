@@ -68,7 +68,7 @@ class ToDoList extends Component {
         // const list = tasks
         // list.push({ text: draft, done: false })
 
-        const task = await toDoItemApi.create({done: false, content: draft, key: ''})
+        const task = await toDoItemApi.create({ done: false, content: draft, key: draft })
 
         this.setState({
             tasks: _.append(task, tasks),
@@ -80,6 +80,21 @@ class ToDoList extends Component {
         this.setState({ tasks: [] })
     }
 
+    findById = (id, arr) => {
+        const index = _.findIndex(_.propEq('id', id))(arr)
+        
+        return { index, task: arr[index] }
+    }
+
+    destroyTask = async (id) => {
+        const { tasks } = this.state
+        await toDoItemApi.destroy(id)
+
+        const { index } = this.findById(id, tasks)
+
+        this.setState({tasks: _.remove(index, 1, tasks)})
+    }
+
     render() {
         const { tasks, draft } = this.state;
         const { title } = this.props;
@@ -88,7 +103,14 @@ class ToDoList extends Component {
             <Container>
                 <Header>{title}</Header>
                 <DestroyButton onClick={ this.removeAll }>Remove all</DestroyButton>
-                { tasks.map(task => <ToDoItem id={task.id} key={task.key} text={task.content} done={task.done} />) }
+                {tasks.map(task => 
+                    <ToDoItem 
+                        id={task.id} 
+                        key={task.key} 
+                        text={task.content} 
+                        done={task.done}
+                        destroy={this.destroyTask} />
+                )}
                 <NewToDoForm
                     onSubmit={this.addNewTask}
                     onChange={this.updateDraft}

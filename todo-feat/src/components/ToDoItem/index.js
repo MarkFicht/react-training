@@ -29,7 +29,7 @@ class ToDoItem extends Component {
      */
     toggleDone = () => {
         // this.setState({ done: !this.state.done })
-        
+
         fetch(`${url}/${this.props.id}`, {
             method: 'PUT',
             headers: {
@@ -38,7 +38,7 @@ class ToDoItem extends Component {
             body: JSON.stringify({
                 done: !this.state.done,
                 content: this.props.text,
-                key: `u${this.props.id}`
+                key: this.props.text
             })
         }).then(res => {
             if ( res.ok ) {
@@ -47,13 +47,17 @@ class ToDoItem extends Component {
         })
     }
 
+    //--- From children to parent
+    destroy = () => this.props.destroy(this.props.id)
+
     render() {
         const { text } = this.props
         const { done } = this.state
 
         return (
-            <Item onClick={this.toggleDone} done={ done }>
-                {text}
+            <Item done={ done }>
+                <div>{text}</div>
+                <button onClick={this.destroy}>x</button>
             </Item>
         )
     }

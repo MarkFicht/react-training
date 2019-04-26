@@ -6,3 +6,6 @@ export const getAll = () =>
 
 export const create = params => 
     api.post( toDoItemsApiUrl(), params )
+
+export const destroy = id => 
+    api.destroy( toDoItemsApiUrl(id) )
