@@ -2,20 +2,14 @@
   "todo_items": [
     {
       "done": false,
-      "content": "Task 1",
-      "key": "u1",
-      "id": 1
-    },
-    {
-      "done": false,
       "content": "Zadanie 4",
       "key": "Zadanie 4",
       "id": 4
     },
     {
-      "done": false,
-      "content": "Zad 3",
-      "key": "Zad 3",
+      "done": true,
+      "content": "Test",
+      "key": "Test",
       "id": 5
     }
   ]

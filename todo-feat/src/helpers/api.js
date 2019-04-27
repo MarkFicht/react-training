@@ -29,6 +29,11 @@ export const post = (url, body) =>
         (resolve, reject) => apiCall(url, 'POST', body, resolve, reject)
     )
 
+export const put = (url, body) => 
+    new Promise(
+        (resolve, reject) => apiCall(url, 'PUT', body, resolve, reject)
+    )
+
 export const destroy = url =>
     new Promise(
         (resolve, reject) => {
@@ -38,7 +43,7 @@ export const destroy = url =>
                     'Content-Type': 'application/json; charset=utf-8'
                 }
             }).then(response => {
-                
+
                 if (response.ok) {
                     resolve(response)
                 } else {

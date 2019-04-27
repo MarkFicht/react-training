@@ -9,3 +9,6 @@ export const create = params =>
 
 export const destroy = id => 
     api.destroy( toDoItemsApiUrl(id) )
+
+export const udpate = (id, params) => 
+    api.put( toDoItemsApiUrl(id), params )

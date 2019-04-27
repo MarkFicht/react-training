@@ -5,7 +5,7 @@ import ToDoItem from '../../components/ToDoItem'
 import NewToDoForm from '../../components/NewToDoForm'
 
 import * as toDoItemApi from '../../helpers/toDoItemApi'
-import * as _ from 'ramda'
+import * as _ from 'ramda' /**   => https://ramdajs.com/docs/   */
 
 const Container = styled.div`
     background: #D9391C;
@@ -61,7 +61,6 @@ class ToDoList extends Component {
         })
     }
 
-    /** https://ramdajs.com/docs/ */
     addNewTask = async () => {
         const { tasks, draft } = this.state;
 
@@ -95,6 +94,15 @@ class ToDoList extends Component {
         this.setState({tasks: _.remove(index, 1, tasks)})
     }
 
+    toggleDone = async (id) => {
+        const { tasks } = this.state
+        const { index, task } = this.findById(id, tasks)
+
+        const response = await toDoItemApi.udpate(id, { done: !task.done, content: task.content, key: task.key })
+
+        this.setState({tasks: _.update(index, response, tasks)})
+    }
+
     render() {
         const { tasks, draft } = this.state;
         const { title } = this.props;
@@ -109,7 +117,8 @@ class ToDoList extends Component {
                         key={task.key} 
                         text={task.content} 
                         done={task.done}
-                        destroy={this.destroyTask} />
+                        destroy={this.destroyTask} 
+                        toggleDone={this.toggleDone} />
                 )}
                 <NewToDoForm
                     onSubmit={this.addNewTask}
