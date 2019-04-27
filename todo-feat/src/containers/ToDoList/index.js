@@ -36,10 +36,6 @@ class ToDoList extends Component {
         console.log(tasks)
         this.setState({ tasks })
 
-        // fetch( `http://localhost:4000/todo_items` )
-        //     .then( res => res.json() )
-        //     .then( json => this.setState({tasks: json}) )
-
         //--- Wersja bez async await ---//
         // toDoItemApi.getAll()
         //     .then( r=> ... )
@@ -63,9 +59,6 @@ class ToDoList extends Component {
 
     addNewTask = async () => {
         const { tasks, draft } = this.state;
-
-        // const list = tasks
-        // list.push({ text: draft, done: false })
 
         const task = await toDoItemApi.create({ done: false, content: draft, key: draft })
 
