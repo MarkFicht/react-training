@@ -7,16 +7,6 @@ import NewToDoForm from '../../components/NewToDoForm'
 import * as toDoItemApi from '../../helpers/toDoItemApi'
 import * as _ from 'ramda' /**   => https://ramdajs.com/docs/   */
 
-const Container = styled.div`
-    background: #D9391C;
-    margin: 0 auto;
-    width: 80%;
-    max-width: 600px;
-    padding: 16px;
-    border-radius: 16px;
-    margin-top: 16px;
-`
-
 const Header = styled.h1`
     color: #FFBF47;
 `
@@ -36,7 +26,7 @@ class ToDoList extends Component {
         console.log(tasks)
         this.setState({ tasks })
 
-        //--- Wersja bez async await ---//
+        //--- Wersja bez 'async ()' & 'await' ---//
         // toDoItemApi.getAll()
         //     .then( r=> ... )
     }
@@ -101,7 +91,7 @@ class ToDoList extends Component {
         const { title } = this.props;
 
         return (
-            <Container>
+            <div>
                 <Header>{title}</Header>
                 <DestroyButton onClick={ this.removeAll }>Remove all</DestroyButton>
                 {tasks.map(task => 
@@ -118,7 +108,7 @@ class ToDoList extends Component {
                     onChange={this.updateDraft}
                     draft={draft}
                 />
-            </Container>
+            </div>
         )
     }
 }
