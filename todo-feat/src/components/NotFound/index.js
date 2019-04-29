@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 
 class NotFound extends Component {
     state = {
-        counter: 5
+        counter: 3
     }
 
     componentDidMount = () => {
@@ -17,10 +18,14 @@ class NotFound extends Component {
     componentWillUnmount = () => clearInterval(this.state.intervalId)
 
     render() {
+        const { location } = this.props
+        const { counter } = this.state
+
         return (
             <div>
-                <p>No match for <code>{this.props.location.pathname}</code></p>
-                <p>Redirect to home in: {this.state.counter}</p>
+                <p>No match for <code>{location.pathname}</code></p>
+                <p>Redirect to home in: {counter}</p>
+                {counter === 0 && <Redirect to='/' />}
             </div>
         )
     }
