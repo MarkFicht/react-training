@@ -23,7 +23,7 @@ class ToDoList extends Component {
     
     componentDidMount = async () => {
         const tasks = await toDoItemApi.getAll()
-        console.log(tasks)
+        // console.log(tasks)
         this.setState({ tasks })
 
         //--- Wersja bez 'async ()' & 'await' ---//
@@ -81,7 +81,7 @@ class ToDoList extends Component {
         const { tasks } = this.state
         const { index, task } = this.findById(id, tasks)
 
-        const response = await toDoItemApi.udpate(id, { done: !task.done, content: task.content, key: task.key })
+        const response = await toDoItemApi.update(id, { done: !task.done, content: task.content, key: task.key })
 
         this.setState({tasks: _.update(index, response, tasks)})
     }
