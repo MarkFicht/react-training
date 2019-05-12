@@ -1,16 +1,17 @@
 {
   "todo_items": [
     {
-      "done": false,
+      "done": true,
       "content": "123123",
       "key": "Zadanie 4",
       "id": 4
     },
     {
-      "done": true,
+      "done": false,
       "content": "Test",
       "key": "Test",
-      "id": 5
+      "id": 5,
+      "priority": "urgent"
     },
     {
       "done": false,

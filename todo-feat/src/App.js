@@ -3,6 +3,8 @@ import './App.css'
 import ToDoList from './containers/ToDoList'
 import ToDoEditFrom from './components/ToDoEditForm'
 import Login from './containers/Login'
+import Navbar from './containers/Navbar'
+import { CurrentUserProvider } from './context/CurrentUser.context'
 import NotFound from './components/NotFound'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
@@ -40,17 +42,20 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Container>
+        <CurrentUserProvider>
+          <Container>
+            <Navbar />
 
-          <Switch>
-            <Route exact path='/' component={ToDoList} />
-            <PrivateRoute exact path='/todo_items/:itemId' component={ToDoEditFrom} />
-            <Route exact path='/login' component={Login} />
+            <Switch>
+              <Route exact path='/' component={ToDoList} />
+              <PrivateRoute exact path='/todo_items/:itemId' component={ToDoEditFrom} />
+              <Route exact path='/login' component={Login} />
 
-            <Route component={NotFound} />
-          </Switch>
+              <Route component={NotFound} />
+            </Switch>
 
-        </Container>
+          </Container>
+        </CurrentUserProvider>
       </Router>
     );
   }
