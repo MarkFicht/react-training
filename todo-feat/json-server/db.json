@@ -4,11 +4,12 @@
       "done": true,
       "content": "123123",
       "key": "Zadanie 4",
-      "id": 4
+      "id": 4,
+      "priority": "high"
     },
     {
       "done": false,
-      "content": "Test",
+      "content": "Test123",
       "key": "Test",
       "id": 5,
       "priority": "urgent"
