@@ -5,9 +5,13 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <HiWorld render={({ changeName, name }) => (
-          <HiYou changeName={changeName} name={name} />
-      )} /> 
+      <HiWorld>
+        {
+          ({ changeName, name }) => (
+            <HiYou changeName={changeName} name={name} />
+          )
+        }
+      </HiWorld> 
     </div>
   );
 }
@@ -26,7 +30,7 @@ class HiWorld extends Component {
   render() {
     const { name } = this.state
 
-    return this.props.render({ name, changeName: this.changeName })
+    return this.props.children({ name, changeName: this.changeName })
   }
 }
 
