@@ -5,25 +5,29 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <HiWorld /> 
+      <HiWorld render={({ changeName, name }) => (
+          <HiYou changeName={changeName} name={name} />
+      )} /> 
     </div>
   );
 }
 
-const HiWorld = () => {
-  const [name, setName] = useState('Marek')
-
-  const changeName = () => {
-    name === 'Marek' ? setName('Artur') : setName('Marek')
-    // console.log('click')
+class HiWorld extends Component {
+  state = {
+    name: 'Marek'
   }
 
-  return (
-    <div className="App">
-      <HiYou changeName={changeName} name={name} />
-    </div>
-  )
+  changeName = () => {
+    this.setState({
+      name: this.state.name === 'Marek' ? 'Artur' : 'Marek'
+    })
+  }
 
+  render() {
+    const { name } = this.state
+
+    return this.props.render({ name, changeName: this.changeName })
+  }
 }
 
 class HiYou extends Component {
